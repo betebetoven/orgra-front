@@ -53,8 +53,8 @@ instruccion:
 prefijo_comando: 
     set_print_x {$$ = "x"}
     | set_print_o {$$ = "o"}
-    | set_print_estrella {$$ = "e"}
-    | set_print_triangulo {$$ = "t"}
+    | set_print_estrella {$$ = "☆"}
+    | set_print_triangulo {$$ = "△"}
     ;
 
 
@@ -86,7 +86,7 @@ e
     | negro
         {$$ = "negro"}
     | amarillo
-        {$$ = "amarillo"}
+        {$$ = "yellow"}
     | magenta
         {$$ = "magenta"}
     ;

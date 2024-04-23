@@ -102,10 +102,10 @@ case 6:
 this.$ = "o"
 break;
 case 7:
-this.$ = "e"
+this.$ = "☆"
 break;
 case 8:
-this.$ = "t"
+this.$ = "△"
 break;
 case 9:
 this.$ =  {"row":$$[$0-6], "col": $$[$0-4], "color": $$[$0-2]};
@@ -141,7 +141,7 @@ case 19:
 this.$ = "negro"
 break;
 case 20:
-this.$ = "amarillo"
+this.$ = "yellow"
 break;
 case 21:
 this.$ = "magenta"
