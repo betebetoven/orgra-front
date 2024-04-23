@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import  orga  from '../parser/orga';
+import orga from '../parser/orga';
 
 const ControlPanel = ({ updateGrid }) => {
-  const [command, setCommand] = useState(''); 
+  const [command, setCommand] = useState('');
   const [error, setError] = useState('');
-  const [Comandos, setComandos] = useState([]); // [1
+  const [Comandos, setComandos] = useState([]);
 
   const handleInputChange = (e) => {
     setCommand(e.target.value);
@@ -13,14 +13,14 @@ const ControlPanel = ({ updateGrid }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      const results = orga.parse(command );
-      setComandos(results); // [1]
+      const results = orga.parse(command);
+      setComandos(results);
       results.forEach(result => {
         if (result) {
           updateGrid(parseInt(result.row), parseInt(result.col), result.figure, result.color);
         }
       });
-      setError(''); // Clear any previous errors on successful command processing
+      setError('');
     } catch (err) {
       setError('Failed to parse command: ' + err.message);
     }
@@ -29,7 +29,13 @@ const ControlPanel = ({ updateGrid }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input type="text" value={command} onChange={handleInputChange} />
+        <textarea 
+          value={command} 
+          onChange={handleInputChange} 
+          rows={10} 
+          cols={50}
+          style={{ fontFamily: 'monospace', fontSize: '16px' }}
+        />
         <button type="submit">Execute</button>
       </form>
       {error && <p style={{ color: 'red' }}>{error}</p>}

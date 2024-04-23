@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+/* Additional styles for the textarea to make it look more like a code editor */
+textarea {
+  margin: 20px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical; /* Allow only vertical resize */
+  overflow: auto; /* Ensures the scrollbar is only shown when necessary */
+}
