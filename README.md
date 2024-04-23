@@ -1,70 +1,57 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Project README
 
-## Available Scripts
+#### Overview
+This project involves a parser developed using Jison, which is a parser generator similar to Bison/Yacc but for JavaScript. The parser is designed to parse a custom language that includes mathematical expressions, drawing commands, and structured instructions.
 
-In the project directory, you can run:
+#### Features
+- **Expression Evaluation**: The parser can evaluate mathematical expressions including basic arithmetic (`+`, `-`, `*`, `/`) and power operations (`^`).
+- **Command Interpretation**: Supports drawing commands that specify the type of shape to draw (e.g., `x`, `o`, `e`, `t`) and its properties like position and color.
+- **Array Output**: Outputs an array of parsed instructions, where each instruction is an object detailing a drawing command or expression.
 
-### `npm start`
+#### Grammar Specification
+The grammar of the parser includes:
+- **Tokens**: Recognizes numbers, arithmetic operators, parentheses, semicolons, and specific keywords for drawing commands and colors.
+- **Productions**:
+  - Expressions for arithmetic calculations.
+  - Instructions for drawing that combine a prefix command with coordinates and a color specification.
+- **Parser Output**: Returns a structured array of instructions, each represented as a JavaScript object.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### Usage
+To use the parser, include it in your JavaScript environment and call the `parse` method with a string containing the commands and expressions to be parsed. The parser will return an array of objects, each representing an instruction decoded from the input string.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### Installation
+- Ensure Node.js is installed on your system.
+- Install Jison globally via npm:
+  ```bash
+  npm install -g jison
+  ```
+- Generate the parser using the Jison file:
+  ```bash
+  jison grammar.jison
+  ```
+- Use the generated JavaScript file in your project.
 
-### `npm test`
+#### Example
+Here's a simple example of using the parser in a Node.js script:
+```javascript
+const parser = require('./path_to_generated_parser.js');
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+const input = `set_print_x (1,2,cyan); set_print_o (3,4,negro);`;
+const output = parser.parse(input);
+console.log(output);
+```
 
-### `npm run build`
+This will output an array of instructions based on the input string, interpreting and structuring each command and its parameters.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Development
+- Modify the `.jison` file to adjust the grammar and rebuild the parser using the Jison command mentioned above.
+- Test changes locally by adjusting the input string and observing the output.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Conclusion
+This parser serves as a foundational tool for interpreting structured commands into a format that can be further processed by drawing libraries or for generating graphical output based on textual commands.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Repository Structure
+- `grammar.jison`: Contains the grammar definition.
+- `README.md`: This file, describing the project.
+- `examples/`: Directory containing example scripts and input files.
