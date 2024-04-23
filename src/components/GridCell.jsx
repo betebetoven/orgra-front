@@ -49,14 +49,14 @@ const GridCell = ({ rowIndex, colIndex, figure, color, onRemove, updateGrid }) =
             <option value="">Select Figure</option>
             <option value="x">X</option>
             <option value="o">O</option>
-            <option value="☆">Star</option>
-            <option value="△">Triangle</option>
+            <option value="☆">☆</option>
+            <option value="△">△</option>
           </select>
           <select onChange={handleChangeColor} value={color}>
             <option value="">Select Color</option>
             <option value="cyan">Cyan</option>
-            <option value="negro">Black</option>
-            <option value="yellow">Yellow</option>
+            <option value="negro">Negro</option>
+            <option value="yellow">Amarillo</option>
             <option value="magenta">Magenta</option>
           </select>
         </EditOverlay>
