@@ -7,9 +7,9 @@ const initialGrid = Array(3).fill().map(() => Array(3).fill({ figure: null, colo
 function App() {
   const [grid, setGrid] = useState(initialGrid);
 
-  useEffect(() => {
+ /* useEffect(() => {
     console.log("Grid state updated:", grid);
-  }, [grid]);
+  }, [grid]);*/
 
   const updateGrid = (row, col, figure, color) => {
     const newGrid = [...grid];
@@ -22,10 +22,26 @@ function App() {
   };
 
   // Function to handle sending the grid data
-  const handleSendGridData = () => {
-    console.log("Sending grid data to backend:", grid);
-    // Here you could also use fetch or axios to POST this data to a backend endpoint
+  const handleSendGridData = async () => {
+    try {
+      console.log("Sending grid data to backend:", grid);
+      const response = await fetch('http://localhost:8080/receive-matrix/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ grid })
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      const responseData = await response.json();
+      console.log("Response from backend:", responseData);
+    } catch (error) {
+      console.error("Failed to send grid data:", error);
+    }
   };
+  
 
   return (
     <div>

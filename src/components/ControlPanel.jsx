@@ -22,7 +22,11 @@ const ControlPanel = ({ updateGrid }) => {
       });
       setError('');
     } catch (err) {
-      setError('Failed to parse command: ' + err.message);
+      //replace /n with <br> in error message
+      err.message = err.message.replace(/(?:\r\n|\r|\n)/g, '<br>');
+      //setError(err.message);
+      //because set error will have a br it needs to accept dangerouslySetInnerHTML to display the error message correctly, do it
+      setError( <div dangerouslySetInnerHTML={{__html: err.message}} /> );
     }
   };
 
