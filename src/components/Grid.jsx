@@ -14,9 +14,12 @@ const Grid = ({ grid, onRemoveFigure, updateGrid }) => (
       row.map((cell, colIndex) => (
         <GridCell
           key={`${rowIndex}-${colIndex}`}
+          rowIndex={rowIndex}
+          colIndex={colIndex}
           figure={cell.figure}
           color={cell.color}
           onRemove={() => onRemoveFigure(rowIndex, colIndex)}
+          updateGrid={updateGrid}
         />
       ))
     )}
