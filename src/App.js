@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Grid from './components/Grid';
+import ControlPanel from './components/ControlPanel';
+
+const initialGrid = Array(3).fill().map(() => Array(3).fill({ figure: null, color: null }));
 
 function App() {
+  const [grid, setGrid] = useState(initialGrid);
+
+  const updateGrid = (row, col, figure, color) => {
+    const newGrid = [...grid];
+    newGrid[row][col] = { figure, color };
+    setGrid(newGrid);
+  };
+
+  const removeFigure = (row, col) => {
+    updateGrid(row, col, null, null);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Grid grid={grid} onRemoveFigure={removeFigure} updateGrid={updateGrid} />
+      <ControlPanel updateGrid={updateGrid} />
     </div>
   );
 }
