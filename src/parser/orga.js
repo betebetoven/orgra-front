@@ -626,48 +626,50 @@ var YYSTATE=YY_START;
 switch($avoiding_name_collisions) {
 case 0:/* skip whitespace */
 break;
-case 1:return 23;
+case 1:// comentario simple línea
 break;
-case 2:return 20;
+case 2:return 23;
 break;
-case 3:return 21;
+case 3:return 20;
 break;
-case 4:return 19;
+case 4:return 21;
 break;
-case 5:return 18;
+case 5:return 19;
 break;
-case 6:return 22;
+case 6:return 18;
 break;
-case 7:return 13;
+case 7:return 22;
 break;
-case 8:return 16;
+case 8:return 13;
 break;
-case 9:return 17;
+case 9:return 16;
 break;
-case 10:return 15;
+case 10:return 17;
 break;
-case 11:return 9;
+case 11:return 15;
 break;
-case 12:return 10;
+case 12:return 9;
 break;
-case 13:return 12;
+case 13:return 10;
 break;
-case 14:return 11;
+case 14:return 12;
 break;
-case 15:return 24;
+case 15:return 11;
 break;
-case 16:return 25
+case 16:return 24;
 break;
-case 17:return 27;
+case 17:return 25
 break;
-case 18:return 26;
+case 18:return 27;
 break;
-case 19:return 5;
+case 19:return 26;
+break;
+case 20:return 5;
 break;
 }
 },
-rules: [/^(?:\s+)/,/^(?:[0-9]+(\.[0-9]+)?\b)/,/^(?:\*)/,/^(?:\/)/,/^(?:-)/,/^(?:\+)/,/^(?:\^)/,/^(?:\()/,/^(?:\))/,/^(?:;)/,/^(?:,)/,/^(?:set_print_x\b)/,/^(?:set_print_o\b)/,/^(?:set_print_triangulo\b)/,/^(?:set_print_estrella\b)/,/^(?:cyan\b)/,/^(?:negro\b)/,/^(?:magenta\b)/,/^(?:amarillo\b)/,/^(?:$)/],
-conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19],"inclusive":true}}
+rules: [/^(?:\s+)/,/^(?:#.*)/,/^(?:[0-9]+(\.[0-9]+)?\b)/,/^(?:\*)/,/^(?:\/)/,/^(?:-)/,/^(?:\+)/,/^(?:\^)/,/^(?:\()/,/^(?:\))/,/^(?:;)/,/^(?:,)/,/^(?:set_print_x\b)/,/^(?:set_print_o\b)/,/^(?:set_print_triangulo\b)/,/^(?:set_print_estrella\b)/,/^(?:cyan\b)/,/^(?:negro\b)/,/^(?:magenta\b)/,/^(?:amarillo\b)/,/^(?:$)/],
+conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"inclusive":true}}
 });
 return lexer;
 })();
@@ -678,4 +680,22 @@ function Parser () {
 Parser.prototype = parser;parser.Parser = Parser;
 return new Parser;
 })();
-export default orga;
+
+
+if (typeof require !== 'undefined' && typeof exports !== 'undefined') {
+exports.parser = orga;
+exports.Parser = orga.Parser;
+exports.parse = function () { return orga.parse.apply(orga, arguments); };
+exports.main = function commonjsMain (args) {
+    if (!args[1]) {
+        console.log('Usage: '+args[0]+' FILE');
+        process.exit(1);
+    }
+    var source = require('fs').readFileSync(require('path').normalize(args[1]), "utf8");
+    return exports.parser.parse(source);
+};
+if (typeof module !== 'undefined' && require.main === module) {
+  exports.main(process.argv.slice(1));
+}
+}
+export default orga

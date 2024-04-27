@@ -5,6 +5,7 @@
 
 %%
 \s+                   /* skip whitespace */
+"#".*                // comentario simple línea
 [0-9]+("."[0-9]+)?\b  return 'NUMBER';
 "*"                   return '*';
 "/"                   return '/';
