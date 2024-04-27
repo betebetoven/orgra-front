@@ -1,0 +1,5 @@
+set_print_o(0,0,amarillo);
+set_print_o(1,0,amarillo);
+set_print_o(0,0,amarillo);
+#set_print_x(1,1,amarillo);
+set_print_o(1,1,amarillo);
