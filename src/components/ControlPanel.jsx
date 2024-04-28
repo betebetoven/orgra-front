@@ -53,6 +53,28 @@ const ControlPanel = ({ updateGrid }) => {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   };
+  //add button that just makes a get to this endpint, called reset @app.get("/reset/")
+  const handleReset = () => {
+    fetch('http://localhost:8080/reset/')
+      .then(response => {
+        if (response.ok) {
+          // Reset successful
+          // Perform any additional actions if needed
+        } else {
+          throw new Error('Reset failed');
+        }
+      })
+      .catch(error => {
+        console.error('Error resetting:', error);
+        setError('Error resetting');
+      });
+  };
+
+  // ...
+
+  <button type="button" onClick={handleReset} style={{ marginTop: '10px' }}>
+    Reset
+  </button>
 
   return (
     <div>
@@ -74,6 +96,7 @@ const ControlPanel = ({ updateGrid }) => {
         <button type="button" onClick={handleSaveToFile} style={{ marginTop: '10px' }}>
           Save to File
         </button>
+        <button type="button" onClick={handleReset} style={{ marginTop: '10px' }}>  reset </button>
       </form>
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
